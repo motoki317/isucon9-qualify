@@ -1,3 +1,19 @@
+# Docker環境の立ち上げ方
+
+```shell
+cd initial-data
+make
+cd ..
+# 画像データダウンロード & 配置を済ませる(以下参照)
+docker-compose up -d
+make init-sql
+make bench
+```
+
+以下元README.md
+
+---
+
 # isucon9-qualify
 
 ## ディレクトリ構成

@@ -1,0 +1,9 @@
+.idea/
+.vscode/
+bin/
+docs/
+initial-data/
+provisioning/
+webapp/docs/
+webapp/frontend/
+webapp/sql/

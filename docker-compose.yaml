@@ -1,0 +1,43 @@
+version: '2.4'
+
+services:
+  bench:
+    container_name: isu9q-bench
+    build:
+      dockerfile: cmd/bench/Dockerfile
+      context: .
+    expose:
+      - 5555
+      - 7000
+    volumes:
+      - ./initial-data:/app/initial-data
+      - ./webapp/public:/app/webapp/public
+
+  go:
+    container_name: isu9q-go
+    build:
+      context: webapp/go
+    cpus: 2
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_USER: isucari
+      MYSQL_PASS: isucari
+      MYSQL_DBNAME: isucari
+    expose:
+      - 8000
+    volumes:
+      - ./webapp/public:/public
+
+  db:
+    container_name: isu9q-db
+    image: mysql:latest
+    cpus: 2
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db:/var/lib/mysql
+      - ./webapp/sql:/app-data:ro
+
+volumes:
+  db:
